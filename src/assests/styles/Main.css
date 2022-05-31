@@ -1,0 +1,82 @@
+*{
+    margin:0;
+    padding:0;
+}
+.main-container{
+    background-color: rgb(236,239,241);
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
+.menu-container{
+    display: flex;
+    flex-direction: column;
+    flex-basis:280px;
+    position: fixed;
+    background-color: rgb(255,255,255);
+    width:300px;
+    height: 100vh;
+}
+.links-container{
+    position: relative;
+    left:12%;
+    top:15%;
+    width:100%;
+    
+}
+.links-container span:nth-child(1){
+    position: relative;
+    right:20px;
+}
+a{
+    text-decoration: none;
+}
+
+li{
+    text-decoration: none;
+}
+
+
+.btn{
+    font-size:1.08rem;
+    color:rgb(69,92,100);
+    padding: 0.7rem 1.2rem;
+    width:80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: first baseline;
+    background-color: white;
+    border-style: none;
+    margin-bottom:30px;
+    outline:none;
+}
+
+.btn:focus{
+    background-color: rgb(236,239,241);
+    border-style: none;
+    color:black;
+    box-shadow: none;
+    
+}
+.btn:active{
+    background-color: rgb(236,239,241);
+    border-style: none;
+    color:black;
+   
+}
+
+.btn:hover{
+    background-color: rgb(236,239,241);
+    color:rgb(69,92,100);
+}
+.btn span{
+    margin-left:20px;
+}
+
+.links-container button:nth-child(5){,
+.links-container button:nth-child(6){
+   
+}
+}
