@@ -1,41 +1,54 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro';
+//importing icons
+import {AiFillHome} from 'react-icons/ai';
+import {FaUser, FaUsers} from 'react-icons/fa';
+import {MdSpaceDashboard} from 'react-icons/md';
+import {MdAddBusiness} from 'react-icons/md';
+import {RiAdminFill} from 'react-icons/ri';
+import {AiFillSetting} from 'react-icons/ai';
 export const SidebarData = [
   {
     title: 'Home',
     path: '/',
-    icon:   <FontAwesomeIcon icon="fa-solid fa-briefcase" />,
-    cName: 'nav-text'
+    icon:   <AiFillHome size={22}/>,
+    cName: 'nav-text',
+
   },
   {
     title: 'Businesses',
-    path: '/Businesses',
-    icon:  <FontAwesomeIcon icon="fa-solid fa-user" />,
-    cName: 'nav-text'
+    path: '/businesses',
+    icon: <MdAddBusiness size={22}/>,
+    cName: 'nav-text',
+ 
   },
   {
     title: 'Dashboard',
-    path: '/Dashboard',
-    icon: <FontAwesomeIcon icon="fa-solid fa-chart-simple" />,
-    cName: 'nav-text'
+    path: '/dashboard',
+    icon: <MdSpaceDashboard size={22}/>,
+    cName: 'nav-text',
+ 
   },
   {
     title: 'Users',
     path: '/Users',
-    icon:<FontAwesomeIcon icon="fa-solid fa-user" />,
-    cName: 'nav-text'
+    icon:<FaUser size={22}/>,
+    cName: 'nav-text',
+   
   },
   {
     title: 'Admin',
     path: '/Admin',
-    icon: <FontAwesomeIcon icon="fa-duotone fa-circle-user" />,
-    cName: 'nav-text'
+    icon: <RiAdminFill size={22}/>,
+    cName: 'nav-text',
+    
   },
   {
     title: 'Settings',
     path: '/Settings',
-    icon:<FontAwesomeIcon icon="fa-duotone fa-screwdriver-wrench" />,
-    cName: 'nav-text'
+    icon:<AiFillSetting size={22}/>,
+    cName: 'nav-text',
+
   }
 ];

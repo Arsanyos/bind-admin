@@ -1,27 +1,28 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
+import { BrowserRouter as Router,Link } from "react-router-dom";
+
+
 import { SidebarData } from "./SidebarData";
-import "../assests/styles/Home.css";
+
 function Main() {
   return (
-    <div className="main-container">
-      <div className="menu-container">
-        <div className="links-container">
-          {SidebarData.map((item, index) => {
-            return(
-               <button type="button" className="btn btn-primary btn-lg">
-              {item.icon}
-              <span>{item.title}</span>
-            </button>
-            );
-          })}
-        </div>
-    
+    <div className="menu-container">
+      <div className="links-container">
+        {SidebarData.map((item, index) => {
+          return (
+            <nav>
+          
+               <Link to={item.path}>
+                  <button type="button" className="btn btn-primary btn-lg">
+                    <span> {item.icon}</span>
+                    
+                    <span>{item.title}</span>
+                    
+                  </button>
+           </Link>
+            </nav>
+          );
+        })}
       </div>
     </div>
   );

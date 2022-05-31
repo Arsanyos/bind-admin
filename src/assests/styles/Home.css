@@ -24,6 +24,17 @@
     width:100%;
     
 }
+.links-container span:nth-child(1){
+    position: relative;
+    right:20px;
+}
+a{
+    text-decoration: none;
+}
+
+li{
+    text-decoration: none;
+}
 
 
 .btn{
@@ -38,21 +49,33 @@
     background-color: white;
     border-style: none;
     margin-bottom:30px;
+    outline:none;
 }
+
 .btn:focus{
     background-color: rgb(236,239,241);
     border-style: none;
-    color:black
+    color:black;
+    box-shadow: none;
+    
 }
 .btn:active{
     background-color: rgb(236,239,241);
     border-style: none;
-    color:black
+    color:black;
+   
 }
+
 .btn:hover{
     background-color: rgb(236,239,241);
     color:rgb(69,92,100);
 }
 .btn span{
     margin-left:20px;
+}
+
+.links-container button:nth-child(5),
+.links-container button:nth-child(6){
+    position: relative;
+    top:100px;
 }
