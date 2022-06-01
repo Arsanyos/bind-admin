@@ -12,42 +12,42 @@ export const SidebarData = [
   {
     title: 'Home',
     path: '/',
-    icon:   <AiFillHome size={22}/>,
+    icon:   <AiFillHome size={30}/>,
     cName: 'nav-text',
 
   },
   {
     title: 'Businesses',
     path: '/businesses',
-    icon: <MdAddBusiness size={22}/>,
+    icon: <MdAddBusiness size={30}/>,
     cName: 'nav-text',
  
   },
   {
     title: 'Dashboard',
     path: '/dashboard',
-    icon: <MdSpaceDashboard size={22}/>,
+    icon: <MdSpaceDashboard size={30}/>,
     cName: 'nav-text',
  
   },
   {
     title: 'Users',
     path: '/Users',
-    icon:<FaUser size={22}/>,
+    icon:<FaUser size={30}/>,
     cName: 'nav-text',
    
   },
   {
     title: 'Admin',
     path: '/Admin',
-    icon: <RiAdminFill size={22}/>,
+    icon: <RiAdminFill size={30}/>,
     cName: 'nav-text',
     
   },
   {
     title: 'Settings',
     path: '/Settings',
-    icon:<AiFillSetting size={22}/>,
+    icon:<AiFillSetting size={30}/>,
     cName: 'nav-text',
 
   }
