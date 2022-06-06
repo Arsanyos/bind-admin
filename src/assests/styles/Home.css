@@ -39,12 +39,42 @@
     font-weight:lighter;
 }
 .mini-analytics-container{
-    background-color:bisque;
-    width:35%;
+    /* background-color:bisque; */
+    width:37%;
     margin:20px;
 }
 .targets-container{
     background-color:blueviolet;
     width:35%;
     margin:20px;
+}
+.reactions-preview-container{
+    padding:10px;
+}
+
+.like-container,.users-container,.review-container{
+    height:70px;
+    width:100%;
+    padding:8px 20px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom:15px;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+.like-container span{
+    font-size:15px;
+}
+.numeric-value-container span:nth-child(1){
+    font-weight: bold;
+}
+.numeric-value-container span:nth-child(2){
+    font-weight:lighter;
+    
+
+}
+.numeric-value-container
+{
+    margin-left:20px;
 }
