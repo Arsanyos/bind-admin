@@ -23,7 +23,9 @@ function Home({ businesses }) {
   useEffect(() =>{ handleReviews()});
 
   function handleReviews() {
-    console.log(businesses);
+    businesses.map((item)=>{
+      console.log(item);
+    })
   }
 
   return (
@@ -64,7 +66,7 @@ function Home({ businesses }) {
           <div className="review-container">
             <FcComments size={38} />
             <div className="numeric-value-container">
-              <span>{count}</span>
+              <span>"count"</span>
               <br />
               <span>Reviews</span>
             </div>

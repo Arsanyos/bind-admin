@@ -22,19 +22,20 @@ import Business from "./components/routes/Business.jsx";
 // import Dashboard from "./components/routes/Dashboard.jsx";
 // import Users from "./components/routes/User.jsx";
 
-function App({ colRef }) {
-  const [businesses, setBusinesses] = useState([]);
 
+function App({ colRef }) {
   useEffect(() => {
     handleData();
   },[]);
- 
+  const [businesses, setBusinesses] = useState([]);
   function handleData() {
+    let list = [];
     getDocs(colRef)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          setBusinesses((oldArray) => [...oldArray, doc.data()]);
+          list.push({id:doc.id, ...doc.data()})
         });
+        setBusinesses(list);
       })
       .catch((err) => {
         console.log(err);
