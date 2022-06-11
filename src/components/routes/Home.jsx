@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../assests/styles/Home.css";
 import admin from "../../assests/images/undraw_financial_data_re_p0fl.svg";
 //importing css
 import { FcLike } from "react-icons/fc";
 import { FcComments } from "react-icons/fc";
 import { BsPeople } from "react-icons/bs";
-function Home() {
+//firestore
+import {
+  getFirestore,
+  collection,
+  where,
+  query,
+  getDocs,
+  getDoc,
+  onSnapshot,
+} from "firebase/firestore";
+
+// ----------------
+
+function Home({ businesses }) {
+  const [count, setCount] = useState(0);
+  useEffect(() =>{ handleReviews()});
+
+  function handleReviews() {
+    console.log(businesses);
+  }
+
   return (
     <div className="home-main-container tu">
       <div className="welcome-container">
@@ -44,7 +64,7 @@ function Home() {
           <div className="review-container">
             <FcComments size={38} />
             <div className="numeric-value-container">
-              <span>20,000</span>
+              <span>{count}</span>
               <br />
               <span>Reviews</span>
             </div>
