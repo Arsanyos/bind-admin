@@ -1,0 +1,9 @@
+*{
+    margin:0;
+    padding:0;
+}
+.user-main-container{
+    position: relative;
+    left:25%; 
+    top:5%;
+}

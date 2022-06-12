@@ -1,5 +1,5 @@
 /*eslint array-callback-return: ["error"]*/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import {
@@ -19,8 +19,8 @@ import Main from "./components/Main.jsx";
 import Home from "./components/routes/Home.jsx";
 import Business from "./components/routes/Business.jsx";
 // import Settings from "./components/routes/Setting.jsx";
-import Dashboard from "./components/routes/Dashboard.jsx";
-// import Users from "./components/routes/User.jsx";
+// import Dashboard from "./components/routes/Dashboard.jsx";
+import Users from "./components/routes/User.jsx";
 
 
 function App({ buisRef,usrRef }) {
@@ -88,7 +88,7 @@ function App({ buisRef,usrRef }) {
               element={<Home user={user}  reviews={reviews} businesses={businesses} />}
             />
             <Route path="/businesses" element={<Business />} />
-            <Route path="/dashboard" element={<Home user={user}  reviews={reviews} businesses={businesses} />} />
+            <Route path="/Users" element={<Users users={users} />} />
           </Routes>
         </div>
       </div>
