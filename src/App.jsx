@@ -19,27 +19,62 @@ import Main from "./components/Main.jsx";
 import Home from "./components/routes/Home.jsx";
 import Business from "./components/routes/Business.jsx";
 // import Settings from "./components/routes/Setting.jsx";
-// import Dashboard from "./components/routes/Dashboard.jsx";
+import Dashboard from "./components/routes/Dashboard.jsx";
 // import Users from "./components/routes/User.jsx";
 
 
-function App({ colRef }) {
+function App({ buisRef,usrRef }) {
+   const [businesses, setBusinesses] = useState([]);
+   const [users,setUsers]=useState([]);
+   const [user, setUser] = useState(0);
+   const [reviews, setReviews] = useState(0);
   useEffect(() => {
-    handleData();
+    getBusinessData();
+    getUserData();
   },[]);
-  const [businesses, setBusinesses] = useState([]);
-  function handleData() {
+  useEffect(()=>{
+    handleUsers();
+    handleReviews();
+  },[businesses,users])
+  function handleUsers() {
+    let size = Object.keys(users).length;
+    setUser(size);
+  }
+  function handleReviews() {
+    let totalReivews = 0;
+    businesses.map((item) => {
+    return  totalReivews += item.Reviews;
+    });
+    setReviews(totalReivews);
+  }
+ function getUserData(){
+   let list=[];
+  getDocs(usrRef)
+  .then((snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      list.push({id:doc.id, ...doc.data()})
+    });
+     setUsers(list);
+  }) 
+.catch((err) => {
+    console.log(err);
+  });
+
+ }
+  function getBusinessData() {
     let list = [];
-    getDocs(colRef)
+    getDocs(buisRef)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           list.push({id:doc.id, ...doc.data()})
         });
         setBusinesses(list);
       })
-      .catch((err) => {
+      
+.catch((err) => {
         console.log(err);
       });
+     
   }
   return (
     <BrowserRouter>
@@ -50,9 +85,10 @@ function App({ colRef }) {
             <Route
               exact={true}
               path="/"
-              element={<Home  businesses={businesses} />}
+              element={<Home user={user}  reviews={reviews} businesses={businesses} />}
             />
             <Route path="/businesses" element={<Business />} />
+            <Route path="/dashboard" element={<Home user={user}  reviews={reviews} businesses={businesses} />} />
           </Routes>
         </div>
       </div>

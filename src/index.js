@@ -18,15 +18,15 @@ const firebaseApp = initializeApp(firebaseConfig);
 //init service
 const db = getFirestore(firebaseApp);
 //collection ref
-const colRef = collection(db, "business");
+const buisRef = collection(db, "business");
+const usrRef = collection(db,"user");
 //get collection data
-let businesses = [];
+
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App colRef={colRef} />
-  </React.StrictMode>,
+    <App usrRef={usrRef} buisRef={buisRef} />
+ ,
   document.getElementById("root")
 );
 
