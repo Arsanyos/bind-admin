@@ -28,18 +28,33 @@ function App({ buisRef,usrRef }) {
    const [users,setUsers]=useState([]);
    const [user, setUser] = useState(0);
    const [reviews, setReviews] = useState(0);
+   const [tableData, settableData] = useState([]);
   useEffect(() => {
+    
     getBusinessData();
     getUserData();
+    
   },[]);
+
   useEffect(()=>{
+    handleTabledata();
     handleUsers();
     handleReviews();
   },[businesses,users])
+
+
+  function handleTabledata() {
+    let tempData = [];
+   users.map((item) => {
+    return tempData.push({username:item.Username, email:item.Email,badge:item.Badge});
+    });
+    settableData(tempData);
+  }
   function handleUsers() {
     let size = Object.keys(users).length;
     setUser(size);
   }
+
   function handleReviews() {
     let totalReivews = 0;
     businesses.map((item) => {
@@ -47,6 +62,7 @@ function App({ buisRef,usrRef }) {
     });
     setReviews(totalReivews);
   }
+
  function getUserData(){
    let list=[];
   getDocs(usrRef)
@@ -88,7 +104,7 @@ function App({ buisRef,usrRef }) {
               element={<Home user={user}  reviews={reviews} businesses={businesses} />}
             />
             <Route path="/businesses" element={<Business />} />
-            <Route path="/Users" element={<Users users={users} />} />
+            <Route path="/Users" element={<Users tableData={tableData} users={users} />} />
           </Routes>
         </div>
       </div>

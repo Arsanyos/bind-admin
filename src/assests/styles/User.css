@@ -7,3 +7,26 @@
     left:25%; 
     top:5%;
 }
+.user-main-container{
+    height:80%;
+    width:60%;
+    position:relative;
+    top:60px;
+
+
+}
+.table-container{
+    position: relative;
+    top:20px;
+    
+}
+table, th, td {
+    /* border:1px solid black; */
+    font-size:20px;
+    padding:60px;
+    padding-top:0;
+    padding-bottom:0;
+}
+table tr{
+    color:Red;
+}
