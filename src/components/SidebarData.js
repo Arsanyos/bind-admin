@@ -36,19 +36,19 @@ export const SidebarData = [
     icon:<FaUser size={30}/>,
     cName: 'nav-text',
    
-  },
-  {
-    title: 'Admin',
-    path: '/Admin',
-    icon: <RiAdminFill size={30}/>,
-    cName: 'nav-text',
-    
-  },
-  {
-    title: 'Settings',
-    path: '/Settings',
-    icon:<AiFillSetting size={30}/>,
-    cName: 'nav-text',
-
   }
+  // {
+  //   title: 'Admin',
+  //   path: '/Admin',
+  //   icon: <RiAdminFill size={30}/>,
+  //   cName: 'nav-text',
+    
+  // },
+  // {
+  //   title: 'Settings',
+  //   path: '/Settings',
+  //   icon:<AiFillSetting size={30}/>,
+  //   cName: 'nav-text',
+
+  // }
 ];

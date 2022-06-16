@@ -4,10 +4,34 @@ import { BiUserCircle } from "react-icons/bi";
 //react-bootstaptable-2
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../assests/styles/User.css";
+import ReactPaginate from "react-paginate";
 
 function User({ users, tableData }) {
+  const [pageNumber, setPageNumber] = useState(0);
+  const itemsPerPage = 2;
+  const Visited = pageNumber * itemsPerPage;
+  const displayTable = tableData
+    .slice(Visited, Visited + itemsPerPage)
+    .map((item) => {
+      return (
+        <tbody>
+          <tr bgcolor="white">
+            <td width="50%">{item.username}</td>
+            <td width="40%">{item.email}</td>
+            <td width="40%">{item.badge}</td>
+            <td width="40%">Active</td>
+          </tr>
+        </tbody>
+      );
+    });
+
+  const pageCount = Math.ceil(tableData.length / itemsPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+  const showTable = () => {};
   useEffect(() => {
-    console.log(tableData);
+    showTable();
   }, [tableData]);
 
   return (
@@ -25,21 +49,21 @@ function User({ users, tableData }) {
               <th width="20%">Status</th>
             </tr>
           </thead>
-          <tbody>
-            {tableData.map((item) => {
-              return (
-              
-                  <tr bgcolor="white">
-                    <td  width="50%">{item.username}</td>
-                    <td width="40%">{item.email}</td>
-                    <td width="40%">{item.badge}</td>
-                    <td width="40%">Active</td>
-                  </tr>
-               
-              );
-            })}
-          </tbody>
+          {displayTable}
         </table>
+        <div className="pagination">
+          <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBtn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        </div>
       </div>
     </div>
   );
