@@ -9,7 +9,7 @@
 }
 .user-main-container{
     height:80%;
-    width:60%;
+    width:70%;
     position:relative;
     top:60px;
 
@@ -18,15 +18,40 @@
 .table-container{
     position: relative;
     top:20px;
-    
+    left:130px;
+    width:72%;
+    margin-top:30px;
+}
+
+table{
+    position: relative;
+    right:130px;
+    border-collapse: separate;
+    border-spacing: 0 40px;
 }
 table, th, td {
     /* border:1px solid black; */
-    font-size:20px;
-    padding:60px;
-    padding-top:0;
-    padding-bottom:0;
+   font-size:22px;
 }
-table tr{
-    color:Red;
+th td{
+    padding:30px;
+    padding-top:0px;
+    padding-bottom:0px;
+}
+tbody{
+    position: relative;
+    right:20px;
+}
+tbody  tr td {
+
+    padding:20px;
+    /* border-radius: 25px; */
+}
+tr :nth-child(1){
+     border-radius: 25px 0 0 25px;
+
+}
+tr :nth-child(4){
+    border-radius: 0 25px 25px 0;
+
 }

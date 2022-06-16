@@ -1,39 +1,42 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 //importing icons
 import { BiUserCircle } from "react-icons/bi";
 //react-bootstaptable-2
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../assests/styles/User.css";
 
-function User({ users,tableData }) {
-  
-useEffect(()=>{
-  console.log(tableData);
-},[tableData])
-  
+function User({ users, tableData }) {
+  useEffect(() => {
+    console.log(tableData);
+  }, [tableData]);
+
   return (
     <div className="user-main-container">
       <div className="link-header-name">
         <h1>Users</h1>
       </div>
       <div className="table-container">
-        <table>
+        <table width="130%">
           <thead>
             <tr>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Badges</th>
-              <th>Status</th>
+              <th width="50%">Username</th>
+              <th width="40%">Email</th>
+              <th width="50%">Badges</th>
+              <th width="20%">Status</th>
             </tr>
           </thead>
           <tbody>
-            {tableData.map((item)=>{
-              return(<tr>
-                <td>{item.username}</td>
-                <th>{item.email}</th>
-                <th>{item.badge}</th>
-                <th>"Active"</th>
-              </tr>);
+            {tableData.map((item) => {
+              return (
+              
+                  <tr bgcolor="white">
+                    <td  width="50%">{item.username}</td>
+                    <td width="40%">{item.email}</td>
+                    <td width="40%">{item.badge}</td>
+                    <td width="40%">Active</td>
+                  </tr>
+               
+              );
             })}
           </tbody>
         </table>
