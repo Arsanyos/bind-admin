@@ -1,0 +1,48 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.dashboard-container{
+    position: relative;
+    left:22%; 
+    top:10%;
+    width:70%;
+}
+.dashboard-container h1{
+    font-style: bolder;
+    font-size:35px;
+    font-weight:bold;
+}
+.dashboard-container-cards{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    margin-top:30px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card{
+    width:200px;
+    height:100px;
+    background-color:white;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+}
+.card span{
+    font-weight:bold;
+    font-size:35px;
+    position: relative;
+   
+    top:10%
+}
+.card p{
+    position: relative;
+    font-weight:15px;
+    font-weight:lighter;
+    margin-top:5px;
+}

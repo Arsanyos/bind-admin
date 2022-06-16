@@ -19,13 +19,14 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 //collection ref
 const buisRef = collection(db, "business");
+const catRef = collection(db,"categories");
 const usrRef = collection(db,"user");
 //get collection data
 
 
 
 ReactDOM.render(
-    <App usrRef={usrRef} buisRef={buisRef} />
+    <App usrRef={usrRef} buisRef={buisRef} catRef={catRef} />
  ,
   document.getElementById("root")
 );
