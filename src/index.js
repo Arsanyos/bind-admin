@@ -30,12 +30,3 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// getDocs(colRef)
-//   .then((snapshot) => {
-//     snapshot.docs.forEach((doc) => {
-//       businesses.push({ ...doc.data() });
-//     });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
