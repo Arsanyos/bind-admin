@@ -23,17 +23,19 @@ import Dashboard from "./components/routes/Dashboard.jsx";
 import Users from "./components/routes/User.jsx";
 import { DashboardCustomize } from "@mui/icons-material";
 
-function App({ buisRef, usrRef, catRef }) {
+function App({ buisRef, usrRef, catRef,reviewRef }) {
+  const [reviews,setReviews]=useState([]);
   const [categories, setcategories] = useState([]);
   const [businesses, setBusinesses] = useState([]);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(0);
-  const [reviews, setReviews] = useState(0);
+  const [reviewsValue, setReviewsValue] = useState(0);
   const [tableData, settableData] = useState([]);
   useEffect(() => {
     getBusinessData();
     getUserData();
     getCategoriesData();
+    getReviewsData();
   }, []);
 
   useEffect(() => {
@@ -63,7 +65,21 @@ function App({ buisRef, usrRef, catRef }) {
     businesses.map((item) => {
       return (totalReivews += item.Reviews);
     });
-    setReviews(totalReivews);
+    setReviewsValue(totalReivews);
+  }
+  function getReviewsData(){
+    let list = [];
+    getDocs(reviewRef)
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        console.log(list);
+        setReviews(list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function getCategoriesData(){
     let list = [];
@@ -117,7 +133,7 @@ function App({ buisRef, usrRef, catRef }) {
               exact={true}
               path="/"
               element={
-                <Home user={user} reviews={reviews} businesses={businesses} />
+                <Home user={user} reviewsValue={reviewsValue} businesses={businesses} />
               }
             />
             <Route
@@ -125,7 +141,7 @@ function App({ buisRef, usrRef, catRef }) {
               element={
                 <Dashboard
                   user={user}
-                  reviews={reviews}
+                  reviewsValue={reviewsValue}
                   businesses={businesses.length}
                   categories={categories.length}
                 />

@@ -1,5 +1,7 @@
 import React from "react";
 import "../../assests/styles/Dashboard.css";
+
+
 function Dashboard({ reviews, businesses, user, categories}) {
   return (
     <div className="dashboard-container">
@@ -22,6 +24,10 @@ function Dashboard({ reviews, businesses, user, categories}) {
           <p>Businesses Categories</p>
         </div>
       </div>
+      <div className="reviews-users-reported-container">
+            <div className="reviews reported">asd</div>
+            <div className="users reported">xcv</div>
+        </div>
     </div>
   );
 }

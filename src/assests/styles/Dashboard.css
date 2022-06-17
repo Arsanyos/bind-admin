@@ -26,7 +26,7 @@
     align-items: center;
 }
 .card{
-    width:200px;
+    width:250px;
     height:100px;
     background-color:white;
     border-radius: 15px;
@@ -45,4 +45,16 @@
     font-weight:15px;
     font-weight:lighter;
     margin-top:5px;
+}
+.reviews-users-reported-container{
+    display: flex;
+    flex-direction: row;
+    margin-top:30px;
+    justify-content: space-between;
+}
+.reported{
+    width:500px;
+    height:300px;
+    border-radius: 15px;
+    background-color:white;
 }

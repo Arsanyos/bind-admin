@@ -21,12 +21,13 @@ const db = getFirestore(firebaseApp);
 const buisRef = collection(db, "business");
 const catRef = collection(db,"categories");
 const usrRef = collection(db,"user");
+const reviewRef = collection(db,"business","reviews");
 //get collection data
 
 
 
 ReactDOM.render(
-    <App usrRef={usrRef} buisRef={buisRef} catRef={catRef} />
+    <App usrRef={usrRef} buisRef={buisRef} catRef={catRef} reviewRef={reviewRef} />
  ,
   document.getElementById("root")
 );
