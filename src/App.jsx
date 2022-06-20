@@ -3,13 +3,13 @@ import React, { useEffect, useState, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import {
+  onSnapshot,
   getFirestore,
   collection,
   where,
   query,
   getDocs,
   getDoc,
-  onSnapshot,
 } from "firebase/firestore";
 //firebase-web-config
 import firebaseConfig from "./firebase.js";
@@ -22,9 +22,10 @@ import Business from "./components/routes/Business.jsx";
 import Dashboard from "./components/routes/Dashboard.jsx";
 import Users from "./components/routes/User.jsx";
 import { DashboardCustomize } from "@mui/icons-material";
+// import { userRecordConstructor } from "firebase-functions/v1/auth";
 
-function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
-  const [reportedReviews,setReportedReviews]=useState([]);
+function App({ buisRef, usrRef, catRef, reviewRef, reportedReviewsRef }) {
+  const [reportedReviews, setReportedReviews] = useState([]);
   const [categories, setcategories] = useState([]);
   const [businesses, setBusinesses] = useState([]);
   const [users, setUsers] = useState([]);
@@ -35,14 +36,18 @@ function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
     getBusinessData();
     getUserData();
     getCategoriesData();
+ 
+  },[]);
+  useEffect(()=>{
     getReportedReviewsData();
-  }, []);
+  },[reportedReviews])
 
   useEffect(() => {
     handleTabledata();
     handleUsers();
     handleReviews();
-  }, [businesses, users]);
+
+  }, [businesses,users]);
 
   function handleTabledata() {
     let tempData = [];
@@ -67,21 +72,19 @@ function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
     });
     setReviewsValue(totalReivews);
   }
-  function getReportedReviewsData(){
+  function getReportedReviewsData() {
     let list = [];
-    getDocs(reportedReviewsRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        console.log(list);
-        setReportedReviews(list);
-      })
-      .catch((err) => {
-        console.log(err);
+    onSnapshot(reportedReviewsRef, (snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        list.push({ id: doc.id, ...doc.data() });
       });
+          setReportedReviews(list);
+      console.log(list);
+     
+    });
+
   }
-  function getCategoriesData(){
+  function getCategoriesData() {
     let list = [];
     getDocs(catRef)
       .then((snapshot) => {
@@ -89,7 +92,6 @@ function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
           list.push({ id: doc.id, ...doc.data().cat });
         });
         setcategories(list);
-        
       })
       .catch((err) => {
         console.log(err);
@@ -122,18 +124,23 @@ function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
         console.log(err);
       });
   }
+
   return (
     <BrowserRouter>
       <div className="App">
         <div className="main-container">
           <Main />
-   
+
           <Routes>
             <Route
               exact={true}
               path="/"
               element={
-                <Home user={user} reviewsValue={reviewsValue} businesses={businesses} />
+                <Home
+                  user={user}
+                  reviewsValue={reviewsValue}
+                  businesses={businesses}
+                />
               }
             />
             <Route
@@ -145,6 +152,9 @@ function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
                   businesses={businesses.length}
                   categories={categories.length}
                   reportedReviews={reportedReviews}
+                  reviewRef={reviewRef}
+                  getReportedReviewsData={getReportedReviewsData}
+                  setReportedReviews={setReportedReviews}
                 />
               }
             />

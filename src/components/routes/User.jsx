@@ -14,11 +14,6 @@ function User({ users, tableData }) {
   const displayTable = users
     .slice(Visited, Visited + itemsPerPage)
     .map((item) => {
-      let badgeIcon;
-      switch(item.Badge){
-        case 'bronze':
-          
-      }
       return (
         <tbody>
           <Popup
@@ -33,6 +28,7 @@ function User({ users, tableData }) {
             position="center"
             closeOnDocumentClick
           >
+             
             <div className="popup-container">
               <h3>User info</h3>
               <br />

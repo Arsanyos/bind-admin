@@ -1,7 +1,85 @@
 import React from "react";
 import "../../assests/styles/Dashboard.css";
+import Popup from "reactjs-popup";
+import { doc, deleteDoc } from "firebase/firestore";
+import {
+  collectionGroup,
+  getFirestore,
+  collection,
+  where,
+  query,
+  getDocs,
+  getDoc,
+  onSnapshot
+} from "firebase/firestore";
 
-function Dashboard({ reportedReviews, businesses, user, categories }) {
+function Dashboard({
+  reportedReviews,
+  businesses,
+  user,
+  categories,
+  reviewRef,
+  reportedReviewsRef,
+  setReportedReviews,
+  firebaseApp,
+}) {
+  const db = getFirestore(firebaseApp);
+
+  function handleDelete(rid) {
+    let x = query(reviewRef, where("Rid", "==", rid));
+    getDocs(x)
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          deleteDoc(doc.ref);
+          console.log(doc.data());
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      alert("Deleted successfuly");
+      
+  }
+
+  const displayReportedReviews = reportedReviews.map((item) => {
+    return (
+      <React.Fragment>
+        <Popup
+          trigger={
+            <div className="reported-reviews-container">
+              <div className="content-container">
+                <p>{item.Content}</p>
+              </div>
+              <div className="vl"></div>
+              <div className="analytics-container">
+                <p>Reports:{item.Reports}</p>
+                <p>Rating:{item.Rating}</p>
+              </div>
+            </div>
+          }
+          position="center"
+          closeOnDocumentClick
+        >
+          <div className="reported-reviews-popup-container">
+            <h4>Reported review information</h4>
+            <p className="content">{item.Content}</p>
+            <div className="specs-ractions">
+              <div className="specifics">
+                <p>Reports : {item.Reports}</p>
+                <p>Rating: {item.Rating}</p>
+                <p>Date posted:{item.Date}</p>
+                <p>Posted by:asdasfsdfsfsdf</p>
+              </div>
+              <div className="react-container">
+                <button>Ignore</button>
+                <button onClick={() => handleDelete(item.Rid)}>Delete</button>
+              </div>
+            </div>
+          </div>
+        </Popup>
+      </React.Fragment>
+    );
+  });
   return (
     <div className="dashboard-container">
       <h1>Dashboard</h1>
@@ -26,23 +104,9 @@ function Dashboard({ reportedReviews, businesses, user, categories }) {
       <div className="reviews-users-reported-container">
         <div className="reviews reported">
           <h3>Reported reviews</h3>
-          {reportedReviews.map((item) => {
-            return (
-              <div className="reported-reviews-container">
-               
-                <div className="content-container">
-                  <p>{item.Content}</p>
-                </div>
-                <div className="vl"></div>
-                <div className="analytics-container">
-                  <p>Reports:{item.Reports}</p>
-                  <p>Rating:{item.Rating}</p>
-                </div>
-
-              </div>
-            );
-          })}
+          {displayReportedReviews}
         </div>
+
         <div className="users reported">xcv</div>
       </div>
     </div>

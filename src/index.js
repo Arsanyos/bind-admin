@@ -10,7 +10,6 @@ import {
   query,
   getDocs,
   getDoc,
-  onSnapshot,
 } from "firebase/firestore";
 //firebase-web-config
 import firebaseConfig from "./firebase.js";
@@ -20,18 +19,23 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 //collection ref
 const buisRef = collection(db, "business");
-const catRef = collection(db,"categories");
-const usrRef = collection(db,"user");
-const reviewRef = collectionGroup (db,"review");
-const reportedReviewsRef = query(reviewRef,where('Reports','>',5))
+const catRef = collection(db, "categories");
+const usrRef = collection(db, "user");
+const reviewRef = collectionGroup(db, "review");
+const reportedReviewsRef = query(reviewRef, where("Reports", ">", 5));
 
 //get collection data
 
 
 
 ReactDOM.render(
-    <App usrRef={usrRef} buisRef={buisRef} catRef={catRef} reviewRef={reviewRef} reportedReviewsRef={reportedReviewsRef} />
- ,
+  <App
+  firebaseApp={firebaseApp}
+    usrRef={usrRef}
+    buisRef={buisRef}
+    catRef={catRef}
+    reviewRef={reviewRef}
+    reportedReviewsRef={reportedReviewsRef}
+  />,
   document.getElementById("root")
 );
-

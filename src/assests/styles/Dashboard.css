@@ -59,19 +59,23 @@
     /* background-color:white; */
     padding:30px;
     padding-top:20px;
-   
+}
+.reported h3{
+    font-weight:bold;
 }
 .reported-reviews-container{
     margin-top:20px;
     width:400px;
     height:90px;
     background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius:20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding:10px
 }
+
 .content-container p{
     white-space: wrap; 
     width: 250px; 
@@ -88,4 +92,55 @@
 }
 .analytics-container p:nth-child(2){
     color:green;
+}
+.reported-reviews-popup-container{
+    height:300px;
+    width:600px;
+    background-color:cadetblue;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding:30px;
+}
+.reported-reviews-popup-container .content{
+    
+}
+.specs-ractions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.specifics{
+    width:400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.react-container button{
+    width:100px;
+    border-radius: 20px;
+    padding: 4px;
+    outline: none;
+    border: none;
+    margin-top:6px;
+    position: relative;
+    left:40px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.react-container button:nth-child(1){
+    color:green;
+}
+.react-container button:nth-child(1):hover{
+    background-color: green;
+    color:white;
+    transition: 0.4s;
+}
+.react-container button:nth-child(2){
+    color:crimson;
+    font-weight: bold;
+}
+.react-container button:nth-child(2):hover{
+    background-color: crimson;
+    color:white;
+    transition: 0.4s;
 }
