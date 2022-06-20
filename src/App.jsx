@@ -23,8 +23,8 @@ import Dashboard from "./components/routes/Dashboard.jsx";
 import Users from "./components/routes/User.jsx";
 import { DashboardCustomize } from "@mui/icons-material";
 
-function App({ buisRef, usrRef, catRef,reviewRef }) {
-  const [reviews,setReviews]=useState([]);
+function App({ buisRef, usrRef, catRef,reviewRef,reportedReviewsRef }) {
+  const [reportedReviews,setReportedReviews]=useState([]);
   const [categories, setcategories] = useState([]);
   const [businesses, setBusinesses] = useState([]);
   const [users, setUsers] = useState([]);
@@ -35,7 +35,7 @@ function App({ buisRef, usrRef, catRef,reviewRef }) {
     getBusinessData();
     getUserData();
     getCategoriesData();
-    getReviewsData();
+    getReportedReviewsData();
   }, []);
 
   useEffect(() => {
@@ -67,15 +67,15 @@ function App({ buisRef, usrRef, catRef,reviewRef }) {
     });
     setReviewsValue(totalReivews);
   }
-  function getReviewsData(){
+  function getReportedReviewsData(){
     let list = [];
-    getDocs(reviewRef)
+    getDocs(reportedReviewsRef)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
         console.log(list);
-        setReviews(list);
+        setReportedReviews(list);
       })
       .catch((err) => {
         console.log(err);
@@ -144,6 +144,7 @@ function App({ buisRef, usrRef, catRef,reviewRef }) {
                   reviewsValue={reviewsValue}
                   businesses={businesses.length}
                   categories={categories.length}
+                  reportedReviews={reportedReviews}
                 />
               }
             />

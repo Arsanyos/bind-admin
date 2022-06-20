@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { initializeApp } from "firebase/app";
 import {
+  collectionGroup,
   getFirestore,
   collection,
   where,
@@ -21,13 +22,15 @@ const db = getFirestore(firebaseApp);
 const buisRef = collection(db, "business");
 const catRef = collection(db,"categories");
 const usrRef = collection(db,"user");
-const reviewRef = collection(db,"business","reviews");
+const reviewRef = collectionGroup (db,"review");
+const reportedReviewsRef = query(reviewRef,where('Reports','>',5))
+
 //get collection data
 
 
 
 ReactDOM.render(
-    <App usrRef={usrRef} buisRef={buisRef} catRef={catRef} reviewRef={reviewRef} />
+    <App usrRef={usrRef} buisRef={buisRef} catRef={catRef} reviewRef={reviewRef} reportedReviewsRef={reportedReviewsRef} />
  ,
   document.getElementById("root")
 );
