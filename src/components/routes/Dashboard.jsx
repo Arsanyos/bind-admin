@@ -1,5 +1,6 @@
 import React from "react";
 import "../../assests/styles/Dashboard.css";
+import { FaUserCircle } from "react-icons/fa";
 import Popup from "reactjs-popup";
 import { doc, deleteDoc } from "firebase/firestore";
 import {
@@ -10,14 +11,16 @@ import {
   query,
   getDocs,
   getDoc,
-  onSnapshot
+  onSnapshot,
 } from "firebase/firestore";
 
 function Dashboard({
+  reportedUsers,
+  reviewsValue,
   reportedReviews,
   businesses,
   user,
-  categories,
+  categoriesSize,
   reviewRef,
   reportedReviewsRef,
   setReportedReviews,
@@ -37,9 +40,34 @@ function Dashboard({
       .catch((err) => {
         console.log(err);
       });
-      alert("Deleted successfuly");
-      
+    alert("Deleted successfuly");
   }
+  const displayReportedUsers = reportedUsers.forEach((item) => {
+    return (
+      <React.Fragment>
+        <Popup
+          trigger={
+            <div className="reported-reviews-container">
+              <div className="content-container">
+                <FaUserCircle />
+              </div>
+              <div className="vl"></div>
+              <div className="analytics-container">
+                <p>Username:{item.Username}</p>
+                <p>Rating:{item.Email}</p>
+              </div>
+            </div>
+          }
+          position="center"
+          closeOnDocumentClick
+        >
+          <div className="reported-users-popup-container">
+            <h1>asd</h1>
+          </div>
+        </Popup>
+      </React.Fragment>
+    );
+  });
 
   const displayReportedReviews = reportedReviews.map((item) => {
     return (
@@ -85,7 +113,7 @@ function Dashboard({
       <h1>Dashboard</h1>
       <div className="dashboard-container-cards">
         <div className="reviews container card">
-          <span>12</span>
+          <span>{reviewsValue}</span>
           <p>Reviews</p>
         </div>
         <div className="buisnesses container card">
@@ -97,7 +125,7 @@ function Dashboard({
           <p>Users</p>
         </div>
         <div className="catagories container card">
-          <span>{categories}</span>
+          <span>12</span>
           <p>Businesses Categories</p>
         </div>
       </div>
@@ -107,7 +135,10 @@ function Dashboard({
           {displayReportedReviews}
         </div>
 
-        <div className="users reported">xcv</div>
+        <div className="users reported">
+          <h3>Reported users</h3>
+          {displayReportedUsers}
+        </div>
       </div>
     </div>
   );

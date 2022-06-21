@@ -1,4 +1,5 @@
 /*eslint array-callback-return: ["error"]*/
+/*eslint no-undef: 0*/
 import React, { useEffect, useState, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
@@ -8,8 +9,10 @@ import {
   collection,
   where,
   query,
+  get,
   getDocs,
   getDoc,
+  doc,
 } from "firebase/firestore";
 //firebase-web-config
 import firebaseConfig from "./firebase.js";
@@ -24,30 +27,79 @@ import Users from "./components/routes/User.jsx";
 import { DashboardCustomize } from "@mui/icons-material";
 // import { userRecordConstructor } from "firebase-functions/v1/auth";
 
-function App({ buisRef, usrRef, catRef, reviewRef, reportedReviewsRef }) {
-  const [reportedReviews, setReportedReviews] = useState([]);
-  const [categories, setcategories] = useState([]);
+const App = ({
+  buisRef,
+  usrRef,
+  catRef,
+  reviewRef,
+  reportedReviewsRef,
+  firebaseApp,
+}) => {
   const [businesses, setBusinesses] = useState([]);
+  const [reportedReviews, setReportedReviews] = useState([]);
+  const [reportedUsers, setReportedUsers] = useState([]);
+  const [reportedUsersRef, setReportedUsersRef] = useState([]);
+  const [categories, setcategories] = useState([]);
+  const [categoriesSize, setcategoriesSize] = useState(0);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(0);
   const [reviewsValue, setReviewsValue] = useState(0);
   const [tableData, settableData] = useState([]);
+  const db = getFirestore(firebaseApp);
   useEffect(() => {
-    getBusinessData();
-    getUserData();
-    getCategoriesData();
- 
-  },[]);
-  useEffect(()=>{
-    getReportedReviewsData();
-  },[reportedReviews])
+    (async () => {
+      const snapshots = await getDocs(reportedReviewsRef);
+      const docs = snapshots.docs.map((doc) => doc.data());
+      const reportedUsers = snapshots.docs.map((doc) => doc.data().Uid);
+      let temp = [];
+      reportedUsers.forEach((item) => {
+        temp.push({ id: Math.floor(Math.random() * 100), ref: item });
+      });
+      // console.log(temp);
+      setReportedUsersRef(temp);
+      setReportedReviews(docs);
+    })();
+  }, []);
+  useEffect(() => {
+    (async () => {
+      let refs = reportedUsersRef.map((item) => item.ref);
+      console.log(refs);
+      setReportedUsers(refs);
+    })();
+  }, [reportedUsersRef]);
+  useEffect(() => {
+    (async () => {
+      const snapshot = await getDocs(buisRef);
+      const docs = snapshot.docs.map((doc) => doc.data());
+      setBusinesses(docs);
+      console.log(reportedUsers);
+    })();
+  }, [reportedUsers]);
+  useEffect(() => {
+    (async () => {
+      const snapshots = await getDocs(usrRef);
+      const docs = snapshots.docs.map((doc) => doc.data());
+      setUsers(docs);
+    })();
+  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const snapshots = await getDocs(catRef);
+  //     const docs = snapshots.docs.map((doc) => doc.data());
+  //     // setcategories(docs);
+  //     // console.log(docs);
+  //     docs.forEach((item)=>{
+  //      item.map(x=>console.log(x));
+  //     })
+  //     // setcategoriesSize(size);
+  //   })();
+  // }, []);
 
   useEffect(() => {
     handleTabledata();
     handleUsers();
     handleReviews();
-
-  }, [businesses,users]);
+  }, [businesses, users]);
 
   function handleTabledata() {
     let tempData = [];
@@ -72,58 +124,6 @@ function App({ buisRef, usrRef, catRef, reviewRef, reportedReviewsRef }) {
     });
     setReviewsValue(totalReivews);
   }
-  function getReportedReviewsData() {
-    let list = [];
-    onSnapshot(reportedReviewsRef, (snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        list.push({ id: doc.id, ...doc.data() });
-      });
-          setReportedReviews(list);
-      console.log(list);
-     
-    });
-
-  }
-  function getCategoriesData() {
-    let list = [];
-    getDocs(catRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data().cat });
-        });
-        setcategories(list);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function getUserData() {
-    let list = [];
-    getDocs(usrRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setUsers(list);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function getBusinessData() {
-    let list = [];
-    getDocs(buisRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setBusinesses(list);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   return (
     <BrowserRouter>
@@ -147,14 +147,15 @@ function App({ buisRef, usrRef, catRef, reviewRef, reportedReviewsRef }) {
               path="/dashboard"
               element={
                 <Dashboard
+                  users={users}
                   user={user}
                   reviewsValue={reviewsValue}
                   businesses={businesses.length}
-                  categories={categories.length}
+                  categoriesSize={categoriesSize}
                   reportedReviews={reportedReviews}
                   reviewRef={reviewRef}
-                  getReportedReviewsData={getReportedReviewsData}
                   setReportedReviews={setReportedReviews}
+                  reportedUsers={reportedUsers}
                 />
               }
             />
@@ -168,5 +169,5 @@ function App({ buisRef, usrRef, catRef, reviewRef, reportedReviewsRef }) {
       </div>
     </BrowserRouter>
   );
-}
+};
 export default App;
