@@ -43,6 +43,7 @@ function Dashboard({
     alert("Deleted successfuly");
   }
   const displayReportedUsers = reportedUsers.forEach((item) => {
+  
     return (
       <React.Fragment>
         <Popup

@@ -63,8 +63,14 @@ const App = ({
   useEffect(() => {
     (async () => {
       let refs = reportedUsersRef.map((item) => item.ref);
-      console.log(refs);
-      setReportedUsers(refs);
+      let reportedUsersTemp = [];
+      refs.forEach(async(item) => {
+        console.log(item);
+        const docSnap = await getDoc(item);
+        console.log(docSnap.data());
+        // reportedUsersTemp.push(doc.data);
+      });
+      setReportedUsers(reportedUsersTemp);
     })();
   }, [reportedUsersRef]);
   useEffect(() => {
