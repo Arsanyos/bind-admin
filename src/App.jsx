@@ -163,7 +163,7 @@ const App = ({
             <Route path="/businesses" element={<Business />} />
             <Route
               path="/verification"
-              element={<Verification pendingUsersRefs={pendingUsersRefs} />}
+              element={<Verification pendingUsersRefs={pendingUsersRefs} firebaseApp={firebaseApp} />}
             />
             <Route
               path="/users"
