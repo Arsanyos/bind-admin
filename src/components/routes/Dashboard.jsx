@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../assests/styles/Dashboard.css";
 import { FaUserCircle } from "react-icons/fa";
 import Popup from "reactjs-popup";
@@ -14,18 +14,17 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-function Dashboard({
+const Dashboard = ({
   reportedUsers,
   reviewsValue,
   reportedReviews,
   businesses,
   user,
-  categoriesSize,
+
   reviewRef,
-  reportedReviewsRef,
-  setReportedReviews,
+
   firebaseApp,
-}) {
+}) => {
   const db = getFirestore(firebaseApp);
 
   function handleDelete(rid) {
@@ -42,33 +41,11 @@ function Dashboard({
       });
     alert("Deleted successfuly");
   }
-  const displayReportedUsers = reportedUsers.forEach((item) => {
   
-    return (
-      <React.Fragment>
-        <Popup
-          trigger={
-            <div className="reported-reviews-container">
-              <div className="content-container">
-                <FaUserCircle />
-              </div>
-              <div className="vl"></div>
-              <div className="analytics-container">
-                <p>Username:{item.Username}</p>
-                <p>Rating:{item.Email}</p>
-              </div>
-            </div>
-          }
-          position="center"
-          closeOnDocumentClick
-        >
-          <div className="reported-users-popup-container">
-            <h1>asd</h1>
-          </div>
-        </Popup>
-      </React.Fragment>
-    );
-  });
+useEffect(()=>{
+  console.log(reportedUsers);
+  console.log(reportedReviews);
+},[reportedUsers,reportedReviews])
 
   const displayReportedReviews = reportedReviews.map((item) => {
     return (
@@ -109,6 +86,24 @@ function Dashboard({
       </React.Fragment>
     );
   });
+  const displayReportedUsers = reportedUsers.map((item) => {
+    return (
+      <React.Fragment>
+        <Popup trigger={ <div className="reported-users-container">
+              <div className="content-container">
+               <FaUserCircle className="user-icon" size={42}/>
+              </div>
+              <div className="vl"></div>
+              <div className="analytics-container">
+                <p>Username:{item.Username}</p>
+                <p>Email:{item.Email}</p>
+              </div>
+            </div>}>
+          <div className="asd">asd</div>
+        </Popup>
+      </React.Fragment>
+    );
+  });
   return (
     <div className="dashboard-container">
       <h1>Dashboard</h1>
@@ -143,5 +138,5 @@ function Dashboard({
       </div>
     </div>
   );
-}
+};
 export default Dashboard;

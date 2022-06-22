@@ -50,25 +50,25 @@ const App = ({
     (async () => {
       const snapshots = await getDocs(reportedReviewsRef);
       const docs = snapshots.docs.map((doc) => doc.data());
-      const reportedUsers = snapshots.docs.map((doc) => doc.data().Uid);
-      let temp = [];
-      reportedUsers.forEach((item) => {
-        temp.push({ id: Math.floor(Math.random() * 100), ref: item });
-      });
-      // console.log(temp);
-      setReportedUsersRef(temp);
       setReportedReviews(docs);
     })();
-  }, []);
+  }, [reportedReviewsRef]);
+  useEffect(()=>{
+    const usersRefs = reportedReviews.map((item)=>{
+     return item.Uid;
+    })
+    console.log(usersRefs);
+    setReportedUsersRef(usersRefs);
+  },[reportedReviews])
   useEffect(() => {
     (async () => {
-      let refs = reportedUsersRef.map((item) => item.ref);
       let reportedUsersTemp = [];
-      refs.forEach(async(item) => {
+      reportedUsersRef.forEach(async(item) => {
         console.log(item);
         const docSnap = await getDoc(item);
-        console.log(docSnap.data());
-        // reportedUsersTemp.push(doc.data);
+        console.log(docSnap.data());  
+        reportedUsersTemp.push(docSnap.data());
+        console.log(reportedUsersTemp);
       });
       setReportedUsers(reportedUsersTemp);
     })();
@@ -78,7 +78,12 @@ const App = ({
       const snapshot = await getDocs(buisRef);
       const docs = snapshot.docs.map((doc) => doc.data());
       setBusinesses(docs);
+      console.log(typeof reportedReviews);
       console.log(reportedUsers);
+      let val =   reportedUsers.map((item)=>{
+        return item;
+       })
+       console.log(val);
     })();
   }, [reportedUsers]);
   useEffect(() => {

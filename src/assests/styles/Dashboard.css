@@ -52,6 +52,10 @@
     margin-top:30px;
     justify-content: space-between;
 }
+.reviews-users-reported-container .users{
+    position: relative;
+    left:70px;
+}
 .reported{
     width:500px;
     height:400px;
@@ -75,7 +79,27 @@
     justify-content: space-around;
     padding:10px
 }
-
+.reported-users-container{
+    margin-top:20px;
+    width:350px;
+    height:90px;
+    background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding:10px
+}
+.reported-users-container .user-icon{
+    position: relative;
+    top:10px;
+}
+.reported-users-container .vl{
+    position: relative;
+    right:20px;
+    top:8px;
+}
 .content-container p{
     white-space: wrap; 
     width: 250px; 
@@ -94,6 +118,14 @@
     color:green;
 }
 .reported-reviews-popup-container{
+    height:300px;
+    width:600px;
+    background-color:cadetblue;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding:30px;
+}
+.reported-users-popup-container{
     height:300px;
     width:600px;
     background-color:cadetblue;
