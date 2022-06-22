@@ -40,7 +40,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-function Home({ businesses, user, reviews }) {
+function Home({ businesses, user, reviewsValue }) {
   const [chartData, setchartData] = useState([]);
 
   useEffect(() => {
@@ -147,7 +147,7 @@ function Home({ businesses, user, reviews }) {
             <div className="review-container">
               <FcComments size={38} />
               <div className="numeric-value-container">
-                <span>{reviews}</span>
+                <span>{reviewsValue}</span>
                 <br />
                 <span>Reviews</span>
               </div>

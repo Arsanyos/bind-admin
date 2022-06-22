@@ -1,15 +1,18 @@
 /*eslint array-callback-return: ["error"]*/
-import React, { useEffect, useState,useMemo } from "react";
+/*eslint no-undef: 0*/
+import React, { useEffect, useState, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import {
+  onSnapshot,
   getFirestore,
   collection,
   where,
   query,
+  get,
   getDocs,
   getDoc,
-  onSnapshot,
+  doc,
 } from "firebase/firestore";
 //firebase-web-config
 import firebaseConfig from "./firebase.js";
@@ -18,35 +21,95 @@ import "./assests/styles/App.css";
 import Main from "./components/Main.jsx";
 import Home from "./components/routes/Home.jsx";
 import Business from "./components/routes/Business.jsx";
-// import Settings from "./components/routes/Setting.jsx";
-// import Dashboard from "./components/routes/Dashboard.jsx";
+import Dashboard from "./components/routes/Dashboard.jsx";
 import Users from "./components/routes/User.jsx";
+import Verification from "./components/routes/Verification.jsx";
+import { DashboardCustomize } from "@mui/icons-material";
+// import { userRecordConstructor } from "firebase-functions/v1/auth";
 
-
-function App({ buisRef,usrRef }) {
-   const [businesses, setBusinesses] = useState([]);
-   const [users,setUsers]=useState([]);
-   const [user, setUser] = useState(0);
-   const [reviews, setReviews] = useState(0);
-   const [tableData, settableData] = useState([]);
+const App = ({
+  buisRef,
+  usrRef,
+  catRef,
+  reviewRef,
+  reportedReviewsRef,
+  pendingRef,
+  firebaseApp,
+}) => {
+  const [businesses, setBusinesses] = useState([]);
+  const [reportedReviews, setReportedReviews] = useState([]);
+  const [reportedUsers, setReportedUsers] = useState([]);
+  const [reportedUsersRef, setReportedUsersRef] = useState([]);
+  const [categories, setcategories] = useState([]);
+  const [categoriesSize, setcategoriesSize] = useState(0);
+  const [pendingUsersRefs, setPendingUsersRefs] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(0);
+  const [reviewsValue, setReviewsValue] = useState(0);
+  const [tableData, settableData] = useState([]);
+  const db = getFirestore(firebaseApp);
   useEffect(() => {
-    
-    getBusinessData();
-    getUserData();
-    
-  },[]);
+    (async () => {
+      const snapshots = await getDocs(reportedReviewsRef);
+      const docs = snapshots.docs.map((doc) => doc.data());
+      setReportedReviews(docs);
+    })();
+  }, [reportedReviewsRef]);
+  useEffect(() => {
+    const usersRefs = reportedReviews.map((item) => item.Uid);
+    console.log(usersRefs);
+    setReportedUsersRef(usersRefs);
+  }, [reportedReviews]);
 
-  useEffect(()=>{
+  useEffect(() => {
+    (async () => {
+      let reportedUsersTemp = [];
+      reportedUsersRef.forEach(async (item) => {
+        const docSnap = await getDoc(item);
+        console.log(docSnap);
+        reportedUsersTemp.push(docSnap.data());
+        console.log(reportedUsersTemp);
+      });
+      setReportedUsers(reportedUsersTemp);
+    })();
+  }, [reportedUsersRef]);
+  useEffect(() => {
+    (async () => {
+      const snapshot = await getDocs(buisRef);
+      const docs = snapshot.docs.map((doc) => doc.data());
+      setBusinesses(docs);
+      console.log(reportedUsers);
+    })();
+  }, [reportedUsers]);
+  useEffect(() => {
+    (async () => {
+      const snapshots = await getDocs(usrRef);
+      const docs = snapshots.docs.map((doc) => doc.data());
+      console.log(docs);
+      setUsers(docs);
+    })();
+  }, []);
+  useEffect(() => {
+    (async () => {
+      const snapshot = await getDocs(pendingRef);
+      const docs = snapshot.docs.map((doc)=>doc.data());
+     setPendingUsersRefs(docs);
+    })();
+  }, []);
+  useEffect(() => {
     handleTabledata();
     handleUsers();
     handleReviews();
-  },[businesses,users])
-
+  }, [businesses, users]);
 
   function handleTabledata() {
     let tempData = [];
-   users.map((item) => {
-    return tempData.push({username:item.Username, email:item.Email,badge:item.Badge});
+    users.map((item) => {
+      return tempData.push({
+        username: item.Username,
+        email: item.Email,
+        badge: item.Badge,
+      });
     });
     settableData(tempData);
   }
@@ -58,57 +121,58 @@ function App({ buisRef,usrRef }) {
   function handleReviews() {
     let totalReivews = 0;
     businesses.map((item) => {
-    return  totalReivews += item.Reviews;
+      return (totalReivews += item.Reviews);
     });
-    setReviews(totalReivews);
+    setReviewsValue(totalReivews);
   }
 
- function getUserData(){
-   let list=[];
-  getDocs(usrRef)
-  .then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      list.push({id:doc.id, ...doc.data()})
-    });
-     setUsers(list);
-  }) 
-.catch((err) => {
-    console.log(err);
-  });
-
- }
-  function getBusinessData() {
-    let list = [];
-    getDocs(buisRef)
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          list.push({id:doc.id, ...doc.data()})
-        });
-        setBusinesses(list);
-      })
-      
-.catch((err) => {
-        console.log(err);
-      });
-     
-  }
   return (
     <BrowserRouter>
       <div className="App">
         <div className="main-container">
           <Main />
+
           <Routes>
             <Route
               exact={true}
               path="/"
-              element={<Home user={user}  reviews={reviews} businesses={businesses} />}
+              element={
+                <Home
+                  user={user}
+                  reviewsValue={reviewsValue}
+                  businesses={businesses}
+                />
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <Dashboard
+                  users={users}
+                  user={user}
+                  reviewsValue={reviewsValue}
+                  businesses={businesses.length}
+                  categoriesSize={categoriesSize}
+                  reportedReviews={reportedReviews}
+                  reviewRef={reviewRef}
+                  setReportedReviews={setReportedReviews}
+                  reportedUsers={reportedUsers}
+                />
+              }
             />
             <Route path="/businesses" element={<Business />} />
-            <Route path="/Users" element={<Users tableData={tableData} users={users} />} />
+            <Route
+              path="/verification"
+              element={<Verification pendingUsersRefs={pendingUsersRefs} firebaseApp={firebaseApp} />}
+            />
+            <Route
+              path="/users"
+              element={<Users tableData={tableData} users={users} />}
+            />
           </Routes>
         </div>
       </div>
     </BrowserRouter>
   );
-}
+};
 export default App;

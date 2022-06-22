@@ -8,6 +8,7 @@ import {MdSpaceDashboard} from 'react-icons/md';
 import {MdAddBusiness} from 'react-icons/md';
 import {RiAdminFill} from 'react-icons/ri';
 import {AiFillSetting} from 'react-icons/ai';
+import {ImCircleRight} from 'react-icons/im';
 export const SidebarData = [
   {
     title: 'Home',
@@ -32,23 +33,17 @@ export const SidebarData = [
   },
   {
     title: 'Users',
-    path: '/Users',
+    path: '/users',
     icon:<FaUser size={30}/>,
     cName: 'nav-text',
    
-  }
-  // {
-  //   title: 'Admin',
-  //   path: '/Admin',
-  //   icon: <RiAdminFill size={30}/>,
-  //   cName: 'nav-text',
-    
-  // },
-  // {
-  //   title: 'Settings',
-  //   path: '/Settings',
-  //   icon:<AiFillSetting size={30}/>,
-  //   cName: 'nav-text',
+  },
+  {
+    title:'Verification',
+    path: '/verification',
+    icon:<ImCircleRight size={30}/>,
+    cName: 'nav-text',
 
-  // }
+  }
+ 
 ];

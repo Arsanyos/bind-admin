@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { initializeApp } from "firebase/app";
 import {
+  collectionGroup,
   getFirestore,
   collection,
   where,
   query,
   getDocs,
   getDoc,
-  onSnapshot,
 } from "firebase/firestore";
 //firebase-web-config
 import firebaseConfig from "./firebase.js";
@@ -19,23 +19,22 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 //collection ref
 const buisRef = collection(db, "business");
-const usrRef = collection(db,"user");
+const catRef = collection(db, "categories");
+const usrRef = collection(db, "user");
+const reviewRef = collectionGroup(db, "review");
+const reportedReviewsRef = query(reviewRef, where("Reports", ">", 5));
+const pendingRef = collection(db,"pending");
 //get collection data
 
-
-
 ReactDOM.render(
-    <App usrRef={usrRef} buisRef={buisRef} />
- ,
+  <App
+  firebaseApp={firebaseApp}
+    usrRef={usrRef}
+    buisRef={buisRef}
+    catRef={catRef}
+    reviewRef={reviewRef}
+    reportedReviewsRef={reportedReviewsRef}
+    pendingRef={pendingRef}
+  />,
   document.getElementById("root")
 );
-
-// getDocs(colRef)
-//   .then((snapshot) => {
-//     snapshot.docs.forEach((doc) => {
-//       businesses.push({ ...doc.data() });
-//     });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });

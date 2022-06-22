@@ -1,0 +1,205 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.dashboard-container{
+    position: relative;
+    left:22%; 
+    top:10%;
+    width:70%;
+}
+.dashboard-container h1{
+    font-style: bolder;
+    font-size:35px;
+    font-weight:bold;
+}
+.dashboard-container-cards{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    margin-top:30px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card{
+    width:250px;
+    height:100px;
+    background-color:white;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+}
+.card span{
+    font-weight:bold;
+    font-size:35px;
+    position: relative;
+   
+    top:10%
+}
+.card p{
+    position: relative;
+    font-weight:15px;
+    font-weight:lighter;
+    margin-top:5px;
+}
+.reviews-users-reported-container{
+    display: flex;
+    flex-direction: row;
+    margin-top:30px;
+    justify-content: space-between;
+}
+.reviews-users-reported-container .users{
+    position: relative;
+    left:70px;
+}
+.reported{
+    width:500px;
+    height:400px;
+    border-radius: 15px;
+    /* background-color:white; */
+    padding:30px;
+    padding-top:20px;
+}
+.reported h3{
+    font-weight:bold;
+}
+.reported-reviews-container{
+    margin-top:20px;
+    width:400px;
+    height:90px;
+    background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding:10px
+}
+.reported-users-container{
+    margin-top:20px;
+    width:350px;
+    height:90px;
+    background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding:10px
+}
+.reported-users-container .analytics-container{
+    position: relative;
+    bottom:6px;
+    right:35px;
+}
+.users-popup{
+    
+}
+.users-popup button{
+    width:100px;
+    border-radius: 10px;
+    padding: 4px;
+    outline: none;
+    border: none;
+    margin-top:6px;
+    position: relative;
+    left:40px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.reported-users-container .analytics-container p{
+    margin-bottom:2px;
+}
+.reported-users-container .user-icon{
+    position: relative;
+    top:10px;
+}
+.reported-users-container .vl{
+    position: relative;
+    right:20px;
+    top:8px;
+}
+.content-container p{
+    white-space: wrap; 
+    width: 250px; 
+    height:70px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.vl{
+    border-left:1px solid coral;
+    height:50px;
+}
+.analytics-container{
+    display: flex;
+    flex-direction: column;
+   
+}
+.analytics-container p{
+    color:crimson;
+}
+.analytics-container p:nth-child(2){
+    color:green;
+}
+.reported-reviews-popup-container{
+    height:300px;
+    width:600px;
+    background-color:cadetblue;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding:30px;
+}
+.reported-users-popup-container{
+    width:500px;
+    height:200px;
+    background-color:white;
+    box-shadow:rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius:20px;
+    padding:30px;
+}
+.users-popup button{
+    margin-right:10px;
+}
+.specs-ractions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.specifics{
+    width:400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.react-container button{
+    width:100px;
+    border-radius: 20px;
+    padding: 4px;
+    outline: none;
+    border: none;
+    margin-top:6px;
+    position: relative;
+    left:40px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.react-container button:nth-child(1){
+    color:green;
+}
+.react-container button:nth-child(1):hover{
+    background-color: green;
+    color:white;
+    transition: 0.4s;
+}
+.react-container button:nth-child(2){
+    color:crimson;
+    font-weight: bold;
+}
+.react-container button:nth-child(2):hover{
+    background-color: crimson;
+    color:white;
+    transition: 0.4s;
+}
