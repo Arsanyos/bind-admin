@@ -21,9 +21,9 @@ import "./assests/styles/App.css";
 import Main from "./components/Main.jsx";
 import Home from "./components/routes/Home.jsx";
 import Business from "./components/routes/Business.jsx";
-// import Settings from "./components/routes/Setting.jsx";
 import Dashboard from "./components/routes/Dashboard.jsx";
 import Users from "./components/routes/User.jsx";
+import Verification from "./components/routes/Verification.jsx";
 import { DashboardCustomize } from "@mui/icons-material";
 // import { userRecordConstructor } from "firebase-functions/v1/auth";
 
@@ -49,24 +49,23 @@ const App = ({
   useEffect(() => {
     (async () => {
       const snapshots = await getDocs(reportedReviewsRef);
-      const docs = snapshots.docs.map((doc) => doc.data());
+      const docs = snapshots.docs.map((doc) => doc.data()); 
       setReportedReviews(docs);
     })();
   }, [reportedReviewsRef]);
   useEffect(()=>{
-    const usersRefs = reportedReviews.map((item)=>{
-     return item.Uid;
-    })
+    const usersRefs = reportedReviews.map(item=>item.Uid)
     console.log(usersRefs);
     setReportedUsersRef(usersRefs);
   },[reportedReviews])
+
   useEffect(() => {
     (async () => {
       let reportedUsersTemp = [];
       reportedUsersRef.forEach(async(item) => {
-        console.log(item);
+ 
         const docSnap = await getDoc(item);
-        console.log(docSnap.data());  
+console.log(docSnap);
         reportedUsersTemp.push(docSnap.data());
         console.log(reportedUsersTemp);
       });
@@ -78,12 +77,7 @@ const App = ({
       const snapshot = await getDocs(buisRef);
       const docs = snapshot.docs.map((doc) => doc.data());
       setBusinesses(docs);
-      console.log(typeof reportedReviews);
-      console.log(reportedUsers);
-      let val =   reportedUsers.map((item)=>{
-        return item;
-       })
-       console.log(val);
+  console.log(reportedUsers);
     })();
   }, [reportedUsers]);
   useEffect(() => {
@@ -171,8 +165,9 @@ const App = ({
               }
             />
             <Route path="/businesses" element={<Business />} />
+            <Route path="/verification" element={<Verification />} />
             <Route
-              path="/Users"
+              path="/users"
               element={<Users tableData={tableData} users={users} />}
             />
           </Routes>

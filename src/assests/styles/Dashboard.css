@@ -91,6 +91,28 @@
     justify-content: space-around;
     padding:10px
 }
+.reported-users-container .analytics-container{
+    position: relative;
+    bottom:6px;
+    right:35px;
+}
+.users-popup{
+    
+}
+.users-popup button{
+    width:100px;
+    border-radius: 10px;
+    padding: 4px;
+    outline: none;
+    border: none;
+    margin-top:6px;
+    position: relative;
+    left:40px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.reported-users-container .analytics-container p{
+    margin-bottom:2px;
+}
 .reported-users-container .user-icon{
     position: relative;
     top:10px;
@@ -111,6 +133,11 @@
     border-left:1px solid coral;
     height:50px;
 }
+.analytics-container{
+    display: flex;
+    flex-direction: column;
+   
+}
 .analytics-container p{
     color:crimson;
 }
@@ -126,15 +153,15 @@
     padding:30px;
 }
 .reported-users-popup-container{
-    height:300px;
-    width:600px;
-    background-color:cadetblue;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    width:500px;
+    height:200px;
+    background-color:white;
+    box-shadow:rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius:20px;
     padding:30px;
 }
-.reported-reviews-popup-container .content{
-    
+.users-popup button{
+    margin-right:10px;
 }
 .specs-ractions{
     display: flex;

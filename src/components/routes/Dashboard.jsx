@@ -41,11 +41,11 @@ const Dashboard = ({
       });
     alert("Deleted successfuly");
   }
-  
-useEffect(()=>{
-  console.log(reportedUsers);
-  console.log(reportedReviews);
-},[reportedUsers,reportedReviews])
+
+  useEffect(() => {
+    console.log(reportedUsers);
+    console.log(reportedReviews);
+  }, [reportedUsers, reportedReviews]);
 
   const displayReportedReviews = reportedReviews.map((item) => {
     return (
@@ -89,17 +89,33 @@ useEffect(()=>{
   const displayReportedUsers = reportedUsers.map((item) => {
     return (
       <React.Fragment>
-        <Popup trigger={ <div className="reported-users-container">
+        <Popup
+          trigger={
+            <div className="reported-users-container">
               <div className="content-container">
-               <FaUserCircle className="user-icon" size={42}/>
+                <FaUserCircle className="user-icon" size={42} />
               </div>
               <div className="vl"></div>
               <div className="analytics-container">
+                <p>Badge: {item.Badge}</p>
                 <p>Username:{item.Username}</p>
                 <p>Email:{item.Email}</p>
               </div>
-            </div>}>
-          <div className="asd">asd</div>
+            </div>
+          }
+        >
+          <div className="reported-users-popup-container">
+            <ul>
+              <li>Username: {item.Username}</li>
+              <li>Firstname: {item.FirstName} </li>
+              <li>lastname: {item.LastName}</li>
+              <li>Email: {item.Email}</li>
+            </ul>
+            <div className="users-popup">
+              <button>Ignore</button>
+              <button>Ban</button>
+            </div>
+          </div>
         </Popup>
       </React.Fragment>
     );
