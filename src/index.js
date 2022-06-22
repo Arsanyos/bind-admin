@@ -23,10 +23,8 @@ const catRef = collection(db, "categories");
 const usrRef = collection(db, "user");
 const reviewRef = collectionGroup(db, "review");
 const reportedReviewsRef = query(reviewRef, where("Reports", ">", 5));
-
+const pendingRef = collection(db,"pending");
 //get collection data
-
-
 
 ReactDOM.render(
   <App
@@ -36,6 +34,7 @@ ReactDOM.render(
     catRef={catRef}
     reviewRef={reviewRef}
     reportedReviewsRef={reportedReviewsRef}
+    pendingRef={pendingRef}
   />,
   document.getElementById("root")
 );

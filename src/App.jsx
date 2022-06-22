@@ -33,6 +33,7 @@ const App = ({
   catRef,
   reviewRef,
   reportedReviewsRef,
+  pendingRef,
   firebaseApp,
 }) => {
   const [businesses, setBusinesses] = useState([]);
@@ -41,6 +42,7 @@ const App = ({
   const [reportedUsersRef, setReportedUsersRef] = useState([]);
   const [categories, setcategories] = useState([]);
   const [categoriesSize, setcategoriesSize] = useState(0);
+  const [pendingUsersRefs, setPendingUsersRefs] = useState([]);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(0);
   const [reviewsValue, setReviewsValue] = useState(0);
@@ -49,23 +51,22 @@ const App = ({
   useEffect(() => {
     (async () => {
       const snapshots = await getDocs(reportedReviewsRef);
-      const docs = snapshots.docs.map((doc) => doc.data()); 
+      const docs = snapshots.docs.map((doc) => doc.data());
       setReportedReviews(docs);
     })();
   }, [reportedReviewsRef]);
-  useEffect(()=>{
-    const usersRefs = reportedReviews.map(item=>item.Uid)
+  useEffect(() => {
+    const usersRefs = reportedReviews.map((item) => item.Uid);
     console.log(usersRefs);
     setReportedUsersRef(usersRefs);
-  },[reportedReviews])
+  }, [reportedReviews]);
 
   useEffect(() => {
     (async () => {
       let reportedUsersTemp = [];
-      reportedUsersRef.forEach(async(item) => {
- 
+      reportedUsersRef.forEach(async (item) => {
         const docSnap = await getDoc(item);
-console.log(docSnap);
+        console.log(docSnap);
         reportedUsersTemp.push(docSnap.data());
         console.log(reportedUsersTemp);
       });
@@ -77,29 +78,24 @@ console.log(docSnap);
       const snapshot = await getDocs(buisRef);
       const docs = snapshot.docs.map((doc) => doc.data());
       setBusinesses(docs);
-  console.log(reportedUsers);
+      console.log(reportedUsers);
     })();
   }, [reportedUsers]);
   useEffect(() => {
     (async () => {
       const snapshots = await getDocs(usrRef);
       const docs = snapshots.docs.map((doc) => doc.data());
+      console.log(docs);
       setUsers(docs);
     })();
   }, []);
-  // useEffect(() => {
-  //   (async () => {
-  //     const snapshots = await getDocs(catRef);
-  //     const docs = snapshots.docs.map((doc) => doc.data());
-  //     // setcategories(docs);
-  //     // console.log(docs);
-  //     docs.forEach((item)=>{
-  //      item.map(x=>console.log(x));
-  //     })
-  //     // setcategoriesSize(size);
-  //   })();
-  // }, []);
-
+  useEffect(() => {
+    (async () => {
+      const snapshot = await getDocs(pendingRef);
+      const docs = snapshot.docs.map((doc)=>doc.data());
+     setPendingUsersRefs(docs);
+    })();
+  }, []);
   useEffect(() => {
     handleTabledata();
     handleUsers();
@@ -165,7 +161,10 @@ console.log(docSnap);
               }
             />
             <Route path="/businesses" element={<Business />} />
-            <Route path="/verification" element={<Verification />} />
+            <Route
+              path="/verification"
+              element={<Verification pendingUsersRefs={pendingUsersRefs} />}
+            />
             <Route
               path="/users"
               element={<Users tableData={tableData} users={users} />}
